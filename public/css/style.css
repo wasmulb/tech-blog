@@ -1,0 +1,150 @@
+/*Universal*/
+* {
+    font-family: Georgia, 'Times New Roman';
+    margin: 0%;
+    padding: 0%;
+}
+
+/*Color Palette*/
+:root {
+    --primary-color: rgb(10,34,57);
+    --secondary-color:  rgb(83, 162, 190);
+    --tertiary-color: rgb(29,132,181);
+}
+
+html {
+    height: 100%;
+}
+
+header {
+    height: 100px;
+    background-color: var(--secondary-color);
+    border-bottom: solid var(--tertiary-color) 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+    padding-left: 15px;
+
+}
+
+header h1 {
+    float: left;
+}
+
+nav {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    
+}
+
+nav a {
+   padding: 25px;
+   color:black;
+}
+
+main {
+    background-color: var(--primary-color);
+    height: 100%-150px;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    border-top: var(--tertiary-color) solid 5px;
+}
+
+/*styles for about me section*/
+
+.blog-post {
+    display: flex;
+    flex-direction: row;
+}
+
+.blog-post h2 {
+    display: flex;
+    flex-direction: row;
+    padding-right: 40px;
+    padding-top: 40px;
+    align-items: center;
+}
+
+.blog-post h6 {
+    display: flex;
+    flex-direction: row;
+    padding-right: 40px;
+    padding-top: 40px;
+    align-items: center;
+}
+
+.blog-post p {
+    display: flex;
+    flex-direction: row;
+    padding: 40px;
+    line-height: 1.5;
+    align-items: center;
+}
+
+
+
+/*Responsiveness*/
+
+@media screen and (max-width: 980px) {
+ header {
+    justify-content: center;
+    text-align: center;
+    padding-top: 50px;
+    padding-bottom: 50px;
+ }
+
+ header h1 {
+    width: 100%;
+ }
+
+ header nav {
+    justify-content: center;
+ }
+
+ .blog-post {
+    display: flex;
+    flex-direction: column;
+}
+
+.blog-post h2 {
+    display: flex;
+    flex-direction: column;
+    padding-right: 40px;
+    padding-top: 40px;
+    align-items: center;
+}
+
+.blog-post p {
+    display: flex;
+    flex-direction: column;
+    padding: 40px;
+    line-height: 1.5;
+    border-left: white solid 1px;
+    align-items: center;
+}
+
+}
+
+
+@media screen and (max-width: 500px) {
+ header {
+    justify-content: center;
+    text-align: center;
+    padding-top: 50px;
+    padding-bottom: 50px;
+ }
+
+ header h1 {
+    display: flex;
+    flex-direction: column;
+ }
+
+ header nav {
+    display: block;
+
+}
+}
