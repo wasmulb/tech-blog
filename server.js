@@ -1,7 +1,6 @@
 const express = require('express');
 const session = require('express-session');
 const exphbs = require('express-handlebars')
-//add sequelize store ->configure in session options
 const path =require('path');
 const sequelize = require('./config/connection');
 const routes = require('./controllers')
@@ -35,10 +34,24 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(routes);
 
+
+//handlebar routes
 app.get('/', (req, res) => {
   console.log(req.session)
   res.render('main');
 });
+
+app.get('/dashboard', (req, res) => {
+  res.render('dashboard')
+})
+
+app.get('/login', (req, res) => {
+  res.render('login')
+})
+
+app.get('/signup', (req, res) => {
+  res.render('signup')
+})
 
   sequelize.sync({ force: false }).then(() => {
     app.listen(PORT, () => console.log(`The server is running on port ${PORT}`));
