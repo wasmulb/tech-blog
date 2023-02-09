@@ -1,34 +1,31 @@
 const router = require('express').Router();
-const { Post } = require('../../models');
+const { Comment } = require('../../models');
 
 router.get('/', async (req, res) => {
     try{
-       const postData = await Post.findAll({
+       const commentData = await Comment.findAll({
         include: [{ model: User }]
        });
-       res.status(200).json(postData);
+       res.status(200).json(commentData);
     } catch(err){
       res.status(500).json(err)
     }
   });
 
-  router.post('/', async (req, res) => {
-    console.log(req.body)
-    try {
-      const newPost = await Post.create({
-        title: req.body.title,
-        content: req.body.content,
-      })
-  
-      res.status(200).json(newPost)
-    }
-    catch (err) {
+  router.post('/', (req, res) => {
+    Comment.create({
+      content: req.body.content,
+    })
+    .then((newComment)=>{
+      res.status(200).json(newComment)
+    })
+    .catch((err)=>{
       res.status(500).json(err);
-    };
+    });
   });
 
   router.put('/:id', (req, res) => {
-    Post.update(
+    Comment.update(
       {
       content: req.body.content
     },
@@ -37,8 +34,8 @@ router.get('/', async (req, res) => {
         id: req.params.id
       }
     })
-    .then((updatedPost)=>{
-      res.status(200).json(updatedPost)
+    .then((updatedComment)=>{
+      res.status(200).json(updatedComment)
     })
     .catch((err)=>{
       res.status(500).json(err)
@@ -46,13 +43,13 @@ router.get('/', async (req, res) => {
   });
 
   router.delete('/:id', (req, res) => {
-    Post.destroy({
+    Comment.destroy({
       where:{
         id: req.params.id,
       },
     })
-    .then((deletedPost)=>{
-      res.status(200).json(deletedPost);
+    .then((deletedComment)=>{
+      res.status(200).json(deletedComment);
     })
     .catch((err)=>{
       res.status(500).json(err)

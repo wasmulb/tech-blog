@@ -1,20 +1,25 @@
 // import models
-// const User = require('./User');
-// const Post = require('./Post')
+const User = require('./User');
+const Post = require('./Post');
+const Comment = require('./Comment')
 
-// // Products belongsTo Category
-// Post.belongsTo(User, {
-//   foreignKey: 'category_id',
-// })
+Post.belongsTo(User, {
+  foreignKey: 'user_id',
+  onDelete: 'CASCADE',
+})
 
-// // Categories have many Products
-// User.hasMany(Post, {
-//   foreignKey: 'category_id',
-//   //Maybe add cascade ondelte
-// })
+//comment will belong to user
+Comment.belongsTo(User, {
+    foreignKey: 'user_id',
+    onDelete: 'CASCADE',
+})
+//post will have many comments
+Post.hasMany(Comment, {
+    foreignKey: 'post_id',
+})
 
-
-// module.exports = {
-//   User,
-//   Post,
-// };
+module.exports = {
+  User,
+  Post,
+  Comment
+};
