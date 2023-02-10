@@ -13,8 +13,14 @@
         <h1>Tech Blog</h1>
         <nav>
             <a href="/">Home</a>
+            {{#if isSignedIn}}
             <a href="/dashboard">Dashboard</a>
-            <a href="/login">Login/Logout</a>
+            <a href="/logout">Logout</a>
+            {{else}}
+            <a href="/signup">Dashboard</a>
+            <a href="/signup">Signup</a>
+            <a href="/login">Login</a>
+            {{/if}}
         </nav>
    </header>
 <main>

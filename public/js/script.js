@@ -32,7 +32,7 @@ function viewAllPosts(){
 
 viewAllPosts()
 
-let userID=2
+let userID=1
 
 function viewDashboardPosts(){
     fetch(`/api/post/${userID}`)
@@ -62,4 +62,9 @@ function viewDashboardPosts(){
             dashboardSection.appendChild(blogPost)
         };
 })
+}
+
+function newPost(){
+
+    fetch()
 }

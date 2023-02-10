@@ -3,11 +3,19 @@ const { User, Post, Comment } = require('../../models');
 
 router.get('/', async (req, res) => {
     try{
-       const postData = await Post.findAll({
+       let postData = await Post.findAll({
         include: [{ model: User }]
        });
+       
+       postData = postData.map((post) => {
+        post = post.get({ plain: true });
+        delete post.user.password;
+        return post;
+       });
+
        res.status(200).json(postData);
     } catch(err){
+      console.error(err)
       res.status(500).json(err)
     }
   });
