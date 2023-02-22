@@ -38,11 +38,16 @@ app.use(routes);
 //handlebar routes
 app.get('/', (req, res) => {
   console.log(req.session)
-  res.render('main');
+  res.render('main', {
+    isSignedIn: req.session.isSignedIn,
+  });
 });
 
 app.get('/dashboard', (req, res) => {
-  res.render('dashboard')
+  res.render('dashboard', {
+    isSignedIn: req.session.isSignedIn,
+    username: req.session.username
+  })
 })
 
 app.get('/login', (req, res) => {

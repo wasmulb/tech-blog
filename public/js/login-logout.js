@@ -17,6 +17,7 @@ const loginFormFunction = async (event) => {
       });
   
       if (response.ok) {
+        alert('Logged in!')
         document.location.replace('/');
       } else {
         alert('Failed to log in.');
@@ -37,4 +38,3 @@ const loginFormFunction = async (event) => {
   };
 
   addEventListener('submit', loginFormFunction)
-

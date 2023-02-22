@@ -63,8 +63,3 @@ function viewDashboardPosts(){
         };
 })
 }
-
-function newPost(){
-
-    fetch()
-}
