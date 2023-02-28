@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { User, Post, Comment } = require('../../models');
+const withAuth = require('../../utils/auth');
 
 router.get('/', async (req, res) => {
     try{
@@ -20,13 +21,13 @@ router.get('/', async (req, res) => {
     }
   });
 
-  router.post('/', async (req, res) => {
+  router.post('/', withAuth, async (req, res) => {
     console.log(req.body)
     try {
       const newPost = await Post.create({
         title: req.body.title,
         content: req.body.content,
-        user_id: req.body.user_id,
+        user_id: req.session.user_id
       })
   
       res.status(200).json(newPost)
@@ -36,14 +37,15 @@ router.get('/', async (req, res) => {
     };
   });
 
-  router.put('/:id', (req, res) => {
+  router.put('/:id', withAuth, (req, res) => {
     Post.update(
       {
       content: req.body.content
     },
     {
       where: {
-        id: req.params.id
+        id: req.params.id,
+        user_id: req.session.user_id
       }
     })
     .then((updatedPost)=>{
@@ -54,10 +56,11 @@ router.get('/', async (req, res) => {
     })
   });
 
-  router.delete('/:id', (req, res) => {
+  router.delete('/:id', withAuth, (req, res) => {
     Post.destroy({
       where:{
         id: req.params.id,
+        user_id: req.session.user_id
       },
     })
     .then((deletedPost)=>{

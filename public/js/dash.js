@@ -6,7 +6,7 @@ const newPost = async (event) => {
     const content = document.getElementById('new-content').value.trim();
     const user_id = 2
 
-    const response = await fetch('/api/user', {
+    const response = await fetch('/api/post', {
         method: 'POST',
         body: JSON.stringify({ title, content, user_id}),
         headers: {

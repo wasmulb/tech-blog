@@ -4,13 +4,14 @@ const exphbs = require('express-handlebars')
 const path =require('path');
 const sequelize = require('./config/connection');
 const routes = require('./controllers')
-const hbs = exphbs.create({})
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 
 const PORT = 3001 || process.env.PORT
 
 const app = express()
 
+const hbs = exphbs.create({})
 //Session setup
 const sess = {
     secret: 'keyboard cat',
@@ -20,6 +21,9 @@ const sess = {
     resave: false,
     saveUninitialized: true,
     //create store stuff here
+     store: new SequelizeStore({
+    db: sequelize
+  })
   }
 
 app.use(session(sess));
@@ -35,28 +39,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(routes);
 
 
-//handlebar routes
-app.get('/', (req, res) => {
-  console.log(req.session)
-  res.render('main', {
-    isSignedIn: req.session.isSignedIn,
-  });
-});
 
-app.get('/dashboard', (req, res) => {
-  res.render('dashboard', {
-    isSignedIn: req.session.isSignedIn,
-    username: req.session.username
-  })
-})
-
-app.get('/login', (req, res) => {
-  res.render('login')
-})
-
-app.get('/signup', (req, res) => {
-  res.render('signup')
-})
 
   sequelize.sync({ force: false }).then(() => {
     app.listen(PORT, () => console.log(`The server is running on port ${PORT}`));

@@ -1,7 +1,5 @@
 const loginForm= document.getElementsByClassName('login-form')
 
-console.log('hello login')
-
 const loginFormFunction = async (event) => {
     event.preventDefault();
   
@@ -10,7 +8,7 @@ const loginFormFunction = async (event) => {
     
   
     if (userName && password) {
-      const response = await fetch('/api/auth/signin', {
+      const response = await fetch('/api/users/signin', {
         method: 'POST',
         body: JSON.stringify({ userName, password }),
         headers: { 'Content-Type': 'application/json' },
@@ -26,7 +24,7 @@ const loginFormFunction = async (event) => {
   };
 
   const logout = async () => {
-    const response = await fetch('/api/auth/signout', {
+    const response = await fetch('/api/users/signout', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json'},
     });
